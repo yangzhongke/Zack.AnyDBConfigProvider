@@ -68,7 +68,7 @@ namespace Zack.AnyDBConfigProvider
                     //https://andrewlock.net/creating-a-custom-iconfigurationprovider-in-asp-net-core-to-parse-yaml/
                     //parse as "a:b:0"="hello";"a:b:1"="world"
                     string path = name + ConfigurationPath.KeyDelimiter + index;
-                    this.Data[path] = item.GetRawText();
+                    this.Data[path] = item.GetValueForConfig();
                     index++;
                 }
             }
@@ -83,7 +83,7 @@ namespace Zack.AnyDBConfigProvider
             else
             {
                 //if it is not json array or object, parse it as plain string value
-                this.Data[name] = jsonRoot.GetRawText();
+                this.Data[name] = jsonRoot.GetValueForConfig();
             }
         }
 
