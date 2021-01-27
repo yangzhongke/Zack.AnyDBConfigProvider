@@ -1,14 +1,14 @@
 # Zack.AnyDBConfigProvider
 ConfigurationProvider for loading configuration from any database, including but not limited to SQLServer, MySQL,PostgreSQL, Oracle, etc.
 
-Step One:
+## Step One:
 
 Create a table for retrieving configuration data from database.
 The table name is 't_configs', which can be changed to other name with further configuration.
 The table must have there columns: Id(int, autoincrement), Name(text/varchar/nvarchar), Value(text/varchar/nvarchar).
 
 Multi rows of the same 'Name' value is allowed, and the row with the maximum id value takes effect , which makes version controlling possible.
-The value of column 'Name' conform with (the flattening of hierarchical data)[https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-5.0#optpat], for example:
+The value of column 'Name' conform with [the flattening of hierarchical data](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-5.0#optpat), for example:
 
 ```
 Api:Jwt:Audience
@@ -29,14 +29,14 @@ ffff
 
 ![example data in MySQL](https://raw.githubusercontent.com/yangzhongke/Zack.AnyDBConfigProvider/main/images/datainmysql.png)
 
-Step Two:
+## Step Two:
 Install the package:
 
 ```
 Install-Package Zack.AnyDBConfigProvider
 ```
 
-Step Three:
+## Step Three:
 
 ```csharp
 ConfigurationBuilder configBuilder = new ConfigurationBuilder();
