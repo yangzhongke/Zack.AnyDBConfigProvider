@@ -25,7 +25,8 @@ namespace Zack.AnyDBConfigProvider
         }
 
         private void DoLoad(string tableName, System.Data.IDbConnection conn)
-        {            
+        {         
+            //
             using (var cmd = conn.CreateCommand())
             {                
                 cmd.CommandText = $"select Name,Value from {tableName} where Id in(select Max(Id) from {tableName} group by Name)";

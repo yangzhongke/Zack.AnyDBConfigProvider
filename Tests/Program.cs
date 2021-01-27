@@ -11,20 +11,23 @@ namespace Tests
         {
             ConfigurationBuilder configBuilder = new ConfigurationBuilder();
             configBuilder.SetBasePath(Directory.GetCurrentDirectory())   
-                //指定配置文件所在的目录
-                   .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);  //指定加载的配置文件
+                   .AddJsonFile("appsettings.json"); 
+            //read the connectionstring of database first.
             var configFile = configBuilder.Build();
+
             string connStr = configFile["DbSettings:ConnectionString"];
+            //add the DbConfiguration to configBuilder
             configBuilder.AddDbConfiguration(() => new MySqlConnection(connStr));
             var config = configBuilder.Build();
 
+            //read configuration 
             string[] strs = config.GetSection("Cors:Origins").Get<string[]>();
             Console.WriteLine(string.Join("|", strs));
             var jwt = config.GetSection("Api:Jwt").Get<JWT>();
             Console.WriteLine(jwt.Secret);
             Console.WriteLine(jwt.Audience);
             Console.WriteLine(string.Join(",",jwt.Ids));
-            Console.WriteLine(config["Id"]);
+            Console.WriteLine(config["Age"]);
             Console.ReadKey();
         }
     }
