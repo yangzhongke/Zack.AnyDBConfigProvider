@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zack.AnyDBConfigProvider", "Zack.AnyDBConfigProvider\Zack.AnyDBConfigProvider.csproj", "{661E6C3C-A409-493F-A9D0-625D8F3DC6C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{822A5B4A-E0A3-4777-B51E-B7D77C6C0DBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{661E6C3C-A409-493F-A9D0-625D8F3DC6C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{661E6C3C-A409-493F-A9D0-625D8F3DC6C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{661E6C3C-A409-493F-A9D0-625D8F3DC6C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{661E6C3C-A409-493F-A9D0-625D8F3DC6C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{822A5B4A-E0A3-4777-B51E-B7D77C6C0DBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{822A5B4A-E0A3-4777-B51E-B7D77C6C0DBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{822A5B4A-E0A3-4777-B51E-B7D77C6C0DBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{822A5B4A-E0A3-4777-B51E-B7D77C6C0DBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {499A2FD7-F739-4DE6-B0CA-069C3CDAC9CF}
+	EndGlobalSection
+EndGlobal
