@@ -6,7 +6,7 @@
     <Description>ConfigurationProvider for loading configuration from any database, including but not limited to SQLServer, MySQL, Oracle, etc.</Description>
     <PackageProjectUrl>https://github.com/yangzhongke/Zack.AnyDBConfigProvider</PackageProjectUrl>
     <RepositoryUrl>https://github.com/yangzhongke/Zack.AnyDBConfigProvider</RepositoryUrl>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

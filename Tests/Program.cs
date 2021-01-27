@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Tests
 {
@@ -20,14 +21,16 @@ namespace Tests
             configBuilder.AddDbConfiguration(() => new MySqlConnection(connStr));
             var config = configBuilder.Build();
 
+            var appItems = config.GetSection("Api:AppItems").Get<ApplicationItem[]>();
             //read configuration 
             string[] strs = config.GetSection("Cors:Origins").Get<string[]>();
-            Console.WriteLine(string.Join("|", strs));
+            Console.WriteLine(string.Join("|", strs.Where(s=>s!=null)));
             var jwt = config.GetSection("Api:Jwt").Get<JWT>();
             Console.WriteLine(jwt.Secret);
             Console.WriteLine(jwt.Audience);
             Console.WriteLine(string.Join(",",jwt.Ids));
             Console.WriteLine(config["Age"]);
+
             Console.ReadKey();
         }
     }
