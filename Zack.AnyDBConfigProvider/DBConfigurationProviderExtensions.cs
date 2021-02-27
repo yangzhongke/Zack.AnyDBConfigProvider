@@ -13,9 +13,10 @@ namespace Microsoft.Extensions.Configuration
                 builder.Add(new DBConfigurationSource(setup));
         }
 
-        public static IConfigurationBuilder AddDbConfiguration(this IConfigurationBuilder builder, Func<IDbConnection> createDbConnection, string tableName= "T_Configs")
+        public static IConfigurationBuilder AddDbConfiguration(this IConfigurationBuilder builder, Func<IDbConnection> createDbConnection, string tableName= "T_Configs",bool reloadOnChange=false,TimeSpan? reloadInterval=null)
         {
-            return AddDbConfiguration(builder, new DBConfigOptions {CreateDbConnection=createDbConnection,TableName=tableName });
+            return AddDbConfiguration(builder, new DBConfigOptions {CreateDbConnection=createDbConnection,TableName=tableName,
+                ReloadOnChange = reloadOnChange, ReloadInterval = reloadInterval});
         }
     }
 }

@@ -2,31 +2,62 @@
 using System;
 using System.Diagnostics;
 using System.Text.Json;
+using System.Threading;
 
 namespace Zack.AnyDBConfigProvider
 {
-    public class DBConfigurationProvider : ConfigurationProvider
+    public class DBConfigurationProvider : ConfigurationProvider,IDisposable
     {
         private DBConfigOptions options;
+        private object lockObj = new object();
+        private bool isDisposed=false;
         public DBConfigurationProvider(DBConfigOptions options)
         {
-            this.options = options;     
+            this.options = options;
+            TimeSpan interval = TimeSpan.FromSeconds(3);
+            if(options.ReloadInterval!=null)
+            {
+                interval = options.ReloadInterval.Value;
+            }
+            if (options.ReloadOnChange)
+            {
+                ThreadPool.QueueUserWorkItem(obj => {
+                    while (!isDisposed)
+                    {
+                        Load();
+                        Thread.Sleep(interval);
+                    }
+                });
+            }            
+        }
+
+        public void Dispose()
+        {
+            this.isDisposed = true;
         }
 
         public override void Load()
         {
             base.Load();
-            string tableName = options.TableName;
-            using (var conn = options.CreateDbConnection())
+            lock (lockObj)
             {
-                conn.Open();
-                DoLoad(tableName, conn);
+                var clonedData = Data.Clone();
+                Data.Clear();
+                string tableName = options.TableName;
+                using (var conn = options.CreateDbConnection())
+                {
+                    conn.Open();
+                    DoLoad(tableName, conn);
+                }
+                if(Helper.IsChanged(clonedData,Data))
+                {
+                    OnReload();
+                }
             }
         }
 
         private void DoLoad(string tableName, System.Data.IDbConnection conn)
         {         
-            //
             using (var cmd = conn.CreateCommand())
             {                
                 cmd.CommandText = $"select Name,Value from {tableName} where Id in(select Max(Id) from {tableName} group by Name)";

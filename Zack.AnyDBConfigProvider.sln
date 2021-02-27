@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zack.AnyDBConfigProvider", "Zack.AnyDBConfigProvider\Zack.AnyDBConfigProvider.csproj", "{661E6C3C-A409-493F-A9D0-625D8F3DC6C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zack.AnyDBConfigProvider", "Zack.AnyDBConfigProvider\Zack.AnyDBConfigProvider.csproj", "{661E6C3C-A409-493F-A9D0-625D8F3DC6C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{822A5B4A-E0A3-4777-B51E-B7D77C6C0DBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{822A5B4A-E0A3-4777-B51E-B7D77C6C0DBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsWeb", "TestsWeb\TestsWeb.csproj", "{233BFE26-E7D2-4DA8-91C9-3CDDC1D47B5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{822A5B4A-E0A3-4777-B51E-B7D77C6C0DBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{822A5B4A-E0A3-4777-B51E-B7D77C6C0DBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{822A5B4A-E0A3-4777-B51E-B7D77C6C0DBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{233BFE26-E7D2-4DA8-91C9-3CDDC1D47B5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{233BFE26-E7D2-4DA8-91C9-3CDDC1D47B5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{233BFE26-E7D2-4DA8-91C9-3CDDC1D47B5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{233BFE26-E7D2-4DA8-91C9-3CDDC1D47B5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Ftp ftp = ViewBag.ftp;
+}
+
+<p>
+    s: @ViewBag.s
+</p>
+
+<p>
+    IP: @ftp.IP  UserName: @ftp.UserName  Password: @ftp.Password
+</p>
