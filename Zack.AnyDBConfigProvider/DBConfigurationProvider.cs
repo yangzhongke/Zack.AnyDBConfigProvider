@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.Json;
 using System.Threading;
@@ -9,10 +10,12 @@ namespace Zack.AnyDBConfigProvider
     public class DBConfigurationProvider : ConfigurationProvider,IDisposable
     {
         private DBConfigOptions options;
-        private object lockObj = new object();
+
+        //allow multi reading and single writing
+        private ReaderWriterLockSlim lockObj = new ReaderWriterLockSlim();
         private bool isDisposed=false;
         public DBConfigurationProvider(DBConfigOptions options)
-        {
+        {            
             this.options = options;
             TimeSpan interval = TimeSpan.FromSeconds(3);
             if(options.ReloadInterval!=null)
@@ -36,23 +39,55 @@ namespace Zack.AnyDBConfigProvider
             this.isDisposed = true;
         }
 
+        public override IEnumerable<string> GetChildKeys(IEnumerable<string> earlierKeys, string parentPath)
+        {
+            lockObj.EnterReadLock();
+            try
+            {
+                return base.GetChildKeys(earlierKeys, parentPath);
+            }
+            finally
+            {
+                lockObj.ExitReadLock();
+            }
+        }
+
+        public override bool TryGet(string key, out string value)
+        {
+            lockObj.EnterReadLock();
+            try
+            {
+                return base.TryGet(key, out value);
+            }
+            finally
+            {
+                lockObj.ExitReadLock();
+            }
+        }
+
         public override void Load()
         {
             base.Load();
-            lock (lockObj)
+            var clonedData = Data.Clone();
+            string tableName = options.TableName;
+            try
             {
-                var clonedData = Data.Clone();
-                Data.Clear();
-                string tableName = options.TableName;
+                lockObj.EnterWriteLock();
+                Data.Clear();                
                 using (var conn = options.CreateDbConnection())
                 {
                     conn.Open();
                     DoLoad(tableName, conn);
                 }
-                if(Helper.IsChanged(clonedData,Data))
-                {
-                    OnReload();
-                }
+            }
+            finally
+            {
+                lockObj.ExitWriteLock();
+            }
+            //OnReload cannot be between EnterWriteLock and ExitWriteLock, or "A read lock may not be acquired with the write lock held in this mode" will be thrown.
+            if (Helper.IsChanged(clonedData, Data))
+            {
+                OnReload();
             }
         }
 

@@ -21,7 +21,7 @@ namespace TestsWeb
                     webBuilder.ConfigureAppConfiguration((hostCtx, configBuilder)=>{
                         var configRoot = configBuilder.Build();
                         string connStr = configRoot.GetConnectionString("conn1");
-                        configBuilder.AddDbConfiguration(() => new MySqlConnection(connStr),reloadOnChange:true,reloadInterval:TimeSpan.FromSeconds(10));
+                        configBuilder.AddDbConfiguration(() => new MySqlConnection(connStr),reloadOnChange:true,reloadInterval:TimeSpan.FromSeconds(2));
                     });
                     //end
                     webBuilder.UseStartup<Startup>();
