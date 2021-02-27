@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Diagnostics;
 using System.Text.Json;
 using System.Threading;
@@ -79,6 +80,12 @@ namespace Zack.AnyDBConfigProvider
                     conn.Open();
                     DoLoad(tableName, conn);
                 }
+            }
+            catch(DbException)
+            {
+                //if DbException is thrown, restore to the original data.
+                this.Data = clonedData;
+                throw;
             }
             finally
             {
