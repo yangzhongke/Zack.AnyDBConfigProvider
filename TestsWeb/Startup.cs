@@ -26,6 +26,8 @@ namespace TestsWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<Ftp>(Configuration.GetSection("Ftp"));
+            services.Configure<Cors>(Configuration.GetSection("Cors"));
+
             ChangeToken.OnChange(() => Configuration.GetSection("Ftp").GetReloadToken(), 
             () =>
             {

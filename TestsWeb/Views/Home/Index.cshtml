@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
     Ftp ftp = ViewBag.ftp;
+    Cors cors = ViewBag.cors;
 }
 
 <p>
@@ -9,4 +10,10 @@
 
 <p>
     IP: @ftp.IP  UserName: @ftp.UserName  Password: @ftp.Password
+</p>
+
+<p>
+    @string.Join(",", cors.Headers)
+
+    @string.Join(",", cors.Origins)
 </p>

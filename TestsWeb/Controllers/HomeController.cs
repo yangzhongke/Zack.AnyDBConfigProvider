@@ -10,20 +10,22 @@ namespace TestsWeb.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration config;
         private readonly IOptionsSnapshot<Ftp> ftpOpt;
+        private readonly IOptionsSnapshot<Cors> corsOpt;
 
-        public HomeController(ILogger<HomeController> logger, IConfiguration config, IOptionsSnapshot<Ftp> ftpOpt)
+        public HomeController(ILogger<HomeController> logger, IConfiguration config, IOptionsSnapshot<Ftp> ftpOpt, IOptionsSnapshot<Cors> corsOpt)
         {
             _logger = logger;
             this.config = config;
             this.ftpOpt = ftpOpt;
+            this.corsOpt = corsOpt;
         }
 
         public IActionResult Index()
         {
-            string[] strs = config.GetSection("Cors:Origins").Get<string[]>();
-            string s = string.Join("|", strs);
-            ViewBag.s = s;
+            string redisCS = config.GetSection("RedisConnStr").Get<string>();
+            ViewBag.s = redisCS;
             ViewBag.ftp = ftpOpt.Value;
+            ViewBag.cors = corsOpt.Value;
             return View();
         }
     }
