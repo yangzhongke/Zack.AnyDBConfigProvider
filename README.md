@@ -1,4 +1,4 @@
-[中文版文档](https://github.com/yangzhongke/Zack.EFCore.Batch/blob/main/README_CHS.md)
+[中文版文档](https://github.com/yangzhongke/Zack.AnyDBConfigProvider/blob/main/README_CHS.md)
 
 # Zack.AnyDBConfigProvider
 ConfigurationProvider for loading configuration from any database in .NET(.NET Core and .NET Framework), including but not limited to SQLServer, MySQL,PostgreSQL, Oracle, etc.
@@ -70,8 +70,11 @@ Then, add the following code into ConfigureServices() of Startup.cs.
 ```csharp
 services.Configure<Ftp>(Configuration.GetSection("Ftp"));
 services.Configure<Cors>(Configuration.GetSection("Cors"));
+```
 
 And, use the following code to read configurations:
+
+```csharp
 public class HomeController : Controller
 {
 	private readonly ILogger<HomeController> _logger;

@@ -1,4 +1,4 @@
-[English Version](https://github.com/yangzhongke/Zack.EFCore.Batch/blob/main/README.md)
+[English Version](https://github.com/yangzhongke/Zack.AnyDBConfigProvider/blob/main/README.md)
 
 # Zack.AnyDBConfigProvider
 在.NET（.NET Core及.NET Framework）下，从任意关系数据库中加载配置的ConfigurationProvider，支持的数据库包括但不限于SQLServer, MySQL,PostgreSQL, Oracle等。
