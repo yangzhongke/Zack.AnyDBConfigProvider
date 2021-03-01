@@ -98,3 +98,5 @@ public class HomeController : Controller
 	}
 }
 ```
+
+[点击查看关于这个组件的原理讲解](https://www.bilibili.com/read/cv10067951)

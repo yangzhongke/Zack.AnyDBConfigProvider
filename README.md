@@ -100,3 +100,5 @@ public class HomeController : Controller
 	}
 }
 ```
+
+[Click here to see how this component works](https://www.reddit.com/r/dotnetcore/comments/lv0o7l/net5_net_core_uses_database_as_configuration/)
