@@ -69,11 +69,12 @@ namespace Zack.AnyDBConfigProvider
         public override void Load()
         {
             base.Load();
-            var clonedData = Data.Clone();
-            string tableName = options.TableName;
+            IDictionary<string, string> clonedData=null;
             try
             {
                 lockObj.EnterWriteLock();
+                clonedData = Data.Clone();
+                string tableName = options.TableName;
                 Data.Clear();                
                 using (var conn = options.CreateDbConnection())
                 {
