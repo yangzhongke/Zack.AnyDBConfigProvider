@@ -24,6 +24,8 @@ ffff
 3
 ```
 
+**注意**因为非双引号包裹的键或者值不是合法的Json格式，比如{'Secret': 'afd3'}或者{Secret: 'afd3'}，所以它们不会被本组件支持，请使用标准的双引号包裹的Json格式：{"Secret": "afd3"}
+
 下面这个数据就是后续演示使用的数据：
 
 ![example data in MySQL](https://raw.githubusercontent.com/yangzhongke/Zack.AnyDBConfigProvider/main/images/datainmysql.png)
@@ -57,6 +59,16 @@ webBuilder.ConfigureAppConfiguration((hostCtx, configBuilder)=>{
 	configBuilder.AddDbConfiguration(() => new MySqlConnection(connStr),reloadOnChange:true,reloadInterval:TimeSpan.FromSeconds(2));
 });
 ```
+
+在 .Net 6中你可以使用如下的代码:
+```csharp
+builder.Host.ConfigureAppConfiguration((hostCtx, configBuilder)=>{
+	var configRoot = configBuilder.Build();
+	string connStr = configRoot.GetConnectionString("conn1");
+	configBuilder.AddDbConfiguration(() => new MySqlConnection(connStr),reloadOnChange:true,reloadInterval:TimeSpan.FromSeconds(2));
+});
+```
+
 上面代码的第3行用来从本地配置中读取到数据库的连接字符串，然后第4行代码使用AddDbConfiguration来添加Zack.AnyDBConfigProvider的支持。我这里是使用MySql数据库，所以使用new MySqlConnection(connStr)创建到MySQL数据库的连接，你可以换任何你想使用的其他数据库管理系统。reloadOnChange参数表示是否在数据库中的配置修改后自动加载，默认值是false。如果把reloadOnChange设置为true，则每隔reloadInterval这个指定的时间段，程序就会扫描一遍数据库中配置表的数据，如果数据库中的配置数据有变化，就会重新加载配置数据。AddDbConfiguration方法还支持一个tableName参数，用来自定义配置表的名字，默认名称为T_Configs。
 不同版本的开发工具生成的项目模板不一样，所以初始代码也不一样，所以上面的代码也许并不能原封不动的放到你的项目中，请根据自己项目的情况来定制化配置的代码。
 

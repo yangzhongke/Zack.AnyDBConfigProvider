@@ -22,6 +22,7 @@ The 'Value' column is for storing value of the corresponding value associated wi
 ffff
 3
 ```
+**Attention**Because the non-double-quoted string is not valid json format, for example, {'Secret': 'afd3'} or{Secret: 'afd3'}, so they are not supported by this library, so please use double-quoted string :{"Secret": "afd3"}
 
 This is the data that will be used in the following demonstrations:
 
@@ -54,6 +55,16 @@ webBuilder.ConfigureAppConfiguration((hostCtx, configBuilder)=>{
 	configBuilder.AddDbConfiguration(() => new MySqlConnection(connStr),reloadOnChange:true,reloadInterval:TimeSpan.FromSeconds(2));
 });
 ```
+In .Net 6, you can use the following code:
+```csharp
+builder.Host.ConfigureAppConfiguration((hostCtx, configBuilder)=>{
+	var configRoot = configBuilder.Build();
+	string connStr = configRoot.GetConnectionString("conn1");
+	configBuilder.AddDbConfiguration(() => new MySqlConnection(connStr),reloadOnChange:true,reloadInterval:TimeSpan.FromSeconds(2));
+});
+```
+
+
 The third line of the above code reads the connection string for the database from the local configuration, and the fourth line uses AddDbConfiguration()to add support for Zack.AnyDBConfigProvider. I'm using the MySQL database, so I creates a connection to the MySQL database using “new MySqlConnection(connStr)”. You can change it to any other database management system you want. 
 	
 The reloadOnChange parameter indicates whether the configuration changes in the database are automatically reloaded. The default value is false. If reloadOnChange is set to true, then every reloadInterval, the program will scan through the database configuration table, if the database configuration data changes, it will reload the configuration data. The AddDbConfiguration() method also supports a tableName parameter as the name of the self-defined configuration table, the default name is  T_Configs.
