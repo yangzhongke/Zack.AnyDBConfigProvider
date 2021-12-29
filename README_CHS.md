@@ -62,10 +62,11 @@ webBuilder.ConfigureAppConfiguration((hostCtx, configBuilder)=>{
 
 在 .Net 6中你可以使用如下的代码:
 ```csharp
-builder.Host.ConfigureAppConfiguration((hostCtx, configBuilder)=>{
-	var configRoot = configBuilder.Build();
-	string connStr = configRoot.GetConnectionString("conn1");
-	configBuilder.AddDbConfiguration(() => new MySqlConnection(connStr),reloadOnChange:true,reloadInterval:TimeSpan.FromSeconds(2));
+var webBuilder = builder.Host;
+webBuilder.ConfigureAppConfiguration((hostCtx, configBuilder) => {
+    var configRoot = builder.Configuration;
+    string connStr = configRoot.GetConnectionString("conn1");
+    configBuilder.AddDbConfiguration(() => new MySqlConnection(connStr), reloadOnChange: true, reloadInterval: TimeSpan.FromSeconds(2));
 });
 ```
 

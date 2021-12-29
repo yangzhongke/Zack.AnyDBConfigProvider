@@ -57,10 +57,11 @@ webBuilder.ConfigureAppConfiguration((hostCtx, configBuilder)=>{
 ```
 In .Net 6, you can use the following code:
 ```csharp
-builder.Host.ConfigureAppConfiguration((hostCtx, configBuilder)=>{
-	var configRoot = configBuilder.Build();
-	string connStr = configRoot.GetConnectionString("conn1");
-	configBuilder.AddDbConfiguration(() => new MySqlConnection(connStr),reloadOnChange:true,reloadInterval:TimeSpan.FromSeconds(2));
+var webBuilder = builder.Host;
+webBuilder.ConfigureAppConfiguration((hostCtx, configBuilder) => {
+    var configRoot = builder.Configuration;
+    string connStr = configRoot.GetConnectionString("conn1");
+    configBuilder.AddDbConfiguration(() => new MySqlConnection(connStr), reloadOnChange: true, reloadInterval: TimeSpan.FromSeconds(2));
 });
 ```
 
