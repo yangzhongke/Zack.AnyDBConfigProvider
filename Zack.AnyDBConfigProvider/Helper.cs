@@ -25,6 +25,10 @@ namespace Zack.AnyDBConfigProvider
             {
                 var oldKey = oldKV.Key;
                 var oldValue = oldKV.Value;
+                if(!newDict.ContainsKey(oldKey))
+                {
+                    return true;
+                }
                 var newValue = newDict[oldKey];
                 if(oldValue!=newValue)
                 {
