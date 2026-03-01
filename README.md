@@ -3,6 +3,12 @@
 # Zack.AnyDBConfigProvider
 ConfigurationProvider for loading configuration from any database in .NET(.NET Core and .NET Framework), including but not limited to SQLServer, MySQL,PostgreSQL, Oracle, etc.
 
+## Nuget Package
+
+```
+Zack.AnyDBConfigProvider
+```
+
 ## Step One:
 
 Create a table for retrieving configuration data from database. The table name is 't_configs', which can be changed to other name with further configuration. The table must have there columns: Id(int, autoincrement), Name(text/varchar/nvarchar), Value(text/varchar/nvarchar).
