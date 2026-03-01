@@ -3,6 +3,12 @@
 # Zack.AnyDBConfigProvider
 在.NET（.NET Core及.NET Framework）下，从任意关系数据库中加载配置的ConfigurationProvider，支持的数据库包括但不限于SQLServer, MySQL,PostgreSQL, Oracle等。
 
+## Nuget Package
+
+```
+Zack.AnyDBConfigProvider
+```
+
 ## 第一步:
 
 在数据库中建一张表，默认名字是T_Configs，这个表名允许自定义为其他名字，具体见后续步骤。表必须有Id、Name、Value三个列，Id定义为整数、自动增长列，Name和Value都定义为字符串类型列，列的最大长度根据系统配置数据的长度来自行确定，Name列为配置项的名字，Value列为配置项的值。
